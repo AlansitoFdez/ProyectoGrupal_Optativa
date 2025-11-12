@@ -7,10 +7,12 @@ $id_wallet = $_POST['id_wallet'];
 
 // No validamos, suponemos que la entrada de datos es correcta
 
-// Definir delete
+// Definir deletes
+$sqlStocks = "DELETE FROM stocks WHERE wallet_id_FK = $id_wallet;";
 $sql = "DELETE FROM wallet WHERE id_wallet = $id_wallet;";
 
-// Ejecutar consulta
+// Ejecutar consultas
+$resultadoDeleteStocks = mysqli_query($conexion, $sqlStocks);
 $resultado = mysqli_query($conexion, $sql);
 
 // Verificar si hay error y almacenar mensaje

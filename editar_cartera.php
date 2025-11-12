@@ -41,7 +41,7 @@ include_once("cabecera.html");
                 <div class="form-group">
                     <label class="col-xs-4 control-label" for="txtDescripcion">Descripción</label>
                     <div class="col-xs-4">
-                        <input value="<?php echo $wallet['descripcion']?>" id="txtDescripcion" name="txtDescripcion" placeholder="Descripcion" class="form-control input-md" type="text">
+                        <input value="<?php echo $wallet['description']?>" id="txtDescripcion" name="txtDescripcion" placeholder="Descripcion" class="form-control input-md" type="text">
                     </div>
                 </div>
                 <div class="form-group">

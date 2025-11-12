@@ -5,13 +5,13 @@ $conexion = obtenerConexion();
 // Recuperar parámetros
 $id_wallet = $_POST['id_wallet'];
 $wallet_name = $_POST['txtNombre'];
-$descripcion = $_POST['txtDescripcion'];
+$description = $_POST['txtDescripcion'];
 $idtipo = $_POST['lstTipo'];
 
 // No validamos, suponemos que la entrada de datos es correcta
 
 // Definir update
-$sql = "UPDATE wallet SET wallet_name = '" . $wallet_name . "' , descripcion = '" . $descripcion . "' , wallet_type_id_FK = $idtipo 
+$sql = "UPDATE wallet SET wallet_name = '" . $wallet_name . "' , description = '" . $description . "' , wallet_type_id_FK = $idtipo 
 WHERE id_wallet = $id_wallet;";
 
 // Ejecutar consulta

@@ -8,7 +8,7 @@ $telefono_cliente = $_GET['txtTelefonoCliente'];
 // No validamos, suponemos que la entrada de datos es correcta
 
 $sql = "SELECT w.*, wt.wallet_type_name AS tipo_wallet, c.customer_name AS nombre_cliente, c.phone AS telefono_cliente FROM wallet w, customers c, wallet_type wt
-WHERE w.id_customers_FK = c.id_customers
+WHERE w.customers_id_FK = c.id_customers
 AND w.wallet_type_id_FK = wt.wallet_type_id
 AND c.phone LIKE '%$telefono_cliente%'";
 
@@ -29,7 +29,7 @@ if(mysqli_num_rows($resultado) > 0 ){ // Mostrar tabla de datos, hay datos
         $mensaje .= "<td>" . $fila['money_amount'] . "</td>";
         $mensaje .= "<td>" . $fila['creation_date'] . "</td>";
         $mensaje .= "<td>" . $fila['tipo_wallet'] . "</td>";
-        $mensaje .= "<td>" . $fila['descripcion'] . "</td>";
+        $mensaje .= "<td>" . $fila['description'] . "</td>";
 
         // Formulario en la celda para procesar borrado del registro
         $mensaje .= "<td><form action='proceso_borrar_wallet.php' method='post'>";

@@ -8,11 +8,11 @@ if (isset($_GET['lstTipo'])) {
     $idtipo = $_GET['lstTipo'];
 
     $sql = "SELECT w.*, c.customer_name, wt.wallet_type_name AS wallet_type_name FROM wallet w, wallet_type wt, customers c
-            WHERE w.wallet_type_id_FK = wt.wallet_type_id AND w.id_customers_FK = c.id_customers AND wt.wallet_type_id = $idtipo ORDER BY id_wallet ASC;";
+            WHERE w.wallet_type_id_FK = wt.wallet_type_id AND w.customers_id_FK = c.id_customers AND wt.wallet_type_id = $idtipo ORDER BY w.id_wallet ASC;";
 
 } else { // No recibo idtipo para filtrar
     $sql = "SELECT w.*, c.customer_name, wt.wallet_type_name AS wallet_type_name FROM wallet w, wallet_type wt, customers c
-            WHERE w.wallet_type_id_FK = wt.wallet_type_id AND w.id_customers_FK = c.id_customers;";
+            WHERE w.wallet_type_id_FK = wt.wallet_type_id AND w.customers_id_FK = c.id_customers ORDER BY w.id_wallet ASC;";
 
 }
 
@@ -34,7 +34,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     $mensaje .= "<td>" . $fila['wallet_name'] . "</td>";
     $mensaje .= "<td>" . $fila['creation_date'] . "</td>";
     $mensaje .= "<td>" . $fila['wallet_type_name'] . "</td>";
-    $mensaje .= "<td>" . $fila['descripcion'] . "</td>";
+    $mensaje .= "<td>" . $fila['description'] . "</td>";
 
     $mensaje .= "<td><form class='d-inline me-1' action='editar_cartera.php' method='post'>";
     $mensaje .= "<input type='hidden' name='wallet' value='" . htmlspecialchars(json_encode($fila),ENT_QUOTES) . "' />";
