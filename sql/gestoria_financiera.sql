@@ -2,10 +2,10 @@
 -- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: db
--- Generation Time: Nov 03, 2025 at 08:31 AM
--- Server version: 8.0.43
--- PHP Version: 8.2.27
+-- Servidor: db
+-- Tiempo de generación: 12-11-2025 a las 10:20:19
+-- Versión del servidor: 8.0.43
+-- Versión de PHP: 8.2.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `gestoria_financiera`
+-- Base de datos: `gestoria_financiera`
 --
+CREATE DATABASE IF NOT EXISTS `gestoria_financiera` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+USE `gestoria_financiera`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `currency`
+-- Estructura de tabla para la tabla `currency`
 --
 
 CREATE TABLE `currency` (
@@ -33,7 +35,7 @@ CREATE TABLE `currency` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `currency`
+-- Volcado de datos para la tabla `currency`
 --
 
 INSERT INTO `currency` (`currency_id`, `currency_name`) VALUES
@@ -44,7 +46,7 @@ INSERT INTO `currency` (`currency_id`, `currency_name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customers`
+-- Estructura de tabla para la tabla `customers`
 --
 
 CREATE TABLE `customers` (
@@ -53,29 +55,13 @@ CREATE TABLE `customers` (
   `customer_name` varchar(69) NOT NULL,
   `customer_active` tinyint(1) NOT NULL,
   `birthdate` date NOT NULL,
-  `currency_id_FK` int DEFAULT NULL
+  `currency_id_FK` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `customers`
---
-
-INSERT INTO `customers` (`id_customers`, `phone`, `customer_name`, `customer_active`, `birthdate`, `currency_id_FK`) VALUES
-(1, 600101002, 'Carlos García', 1, '1995-02-02', 2),
-(2, 600101003, 'María López', 1, '1988-05-14', 2),
-(3, 600101004, 'Pedro Martín', 1, '1990-08-22', 1),
-(4, 600101005, 'Ana Ruiz', 1, '1997-12-10', 3),
-(5, 600101006, 'Lucía Torres', 1, '1998-07-03', 2),
-(6, 600101007, 'Javier Ramos', 1, '1985-09-29', 2),
-(7, 600101008, 'Paula Soto', 1, '1993-03-21', 1),
-(8, 600101009, 'Miguel Vela', 1, '1992-11-01', 3),
-(9, 600101010, 'Cristina Peña', 1, '1991-04-05', 2),
-(10, 600101011, 'David Navarro', 1, '1986-06-15', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stocks`
+-- Estructura de tabla para la tabla `stocks`
 --
 
 CREATE TABLE `stocks` (
@@ -84,69 +70,42 @@ CREATE TABLE `stocks` (
   `stock_name` varchar(69) NOT NULL,
   `in_use` tinyint(1) NOT NULL,
   `added_date` date NOT NULL,
-  `id_wallet_FK` int DEFAULT NULL,
-  `stock_type_id_FK` int DEFAULT NULL
+  `wallet_id_FK` int NOT NULL,
+  `stock_type_id_FK` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `stocks`
---
-
-INSERT INTO `stocks` (`id_stocks`, `quantity`, `stock_name`, `in_use`, `added_date`, `id_wallet_FK`, `stock_type_id_FK`) VALUES
-(1, 10, 'Apple Inc.', 1, '2025-01-10', 1, 1),
-(2, 12, 'Microsoft Corp.', 1, '2025-01-15', 2, 2),
-(3, 8, 'Amazon.com Inc.', 1, '2025-01-20', 3, 3),
-(4, 9, 'Alphabet Inc.', 1, '2025-02-01', 4, 4),
-(5, 6, 'Johnson & Johnson', 1, '2025-02-12', 5, 5),
-(6, 5, 'Nestlé', 1, '2025-03-01', 6, 6),
-(7, 13, 'Banco Santander', 1, '2025-03-10', 7, 7),
-(8, 4, 'Siemens AG', 1, '2025-03-18', 8, 8),
-(9, 11, 'Tesla Inc.', 1, '2025-04-01', 9, 9),
-(10, 7, 'Novartis', 1, '2025-04-12', 10, 10),
-(11, 5, 'Apple Inc.', 1, '2025-04-20', 11, 1),
-(12, 4, 'Microsoft Corp.', 1, '2025-05-01', 12, 2),
-(13, 3, 'Amazon.com Inc.', 1, '2025-05-09', 13, 3),
-(14, 2, 'Alphabet Inc.', 1, '2025-05-15', 14, 4),
-(15, 8, 'Nestlé', 1, '2025-06-01', 15, 6),
-(16, 6, 'Tesla Inc.', 1, '2025-06-10', 16, 9),
-(17, 5, 'Banco Santander', 1, '2025-07-01', 17, 7),
-(18, 13, 'Johnson & Johnson', 1, '2025-07-15', 18, 5),
-(19, 9, 'Novartis', 1, '2025-08-01', 19, 10),
-(20, 6, 'Siemens AG', 1, '2025-08-20', 20, 8),
-(21, 10, 'Nestlé', 1, '2025-09-01', 21, 6),
-(22, 5, 'Tesla Inc.', 1, '2025-09-10', 22, 9);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stock_type`
+-- Estructura de tabla para la tabla `stock_type`
 --
 
 CREATE TABLE `stock_type` (
   `stock_type_id` int NOT NULL,
-  `stock_type_name` varchar(69) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+  `stock_type_name` varchar(69) NOT NULL,
+  `stock_type_quality` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `stock_type`
+-- Volcado de datos para la tabla `stock_type`
 --
 
-INSERT INTO `stock_type` (`stock_type_id`, `stock_type_name`) VALUES
-(1, 'Apple Inc.'),
-(2, 'Microsoft Corp.'),
-(3, 'Amazon.com Inc.'),
-(4, 'Alphabet Inc.'),
-(5, 'Johnson & Johnson'),
-(6, 'Nestlé'),
-(7, 'Banco Santander'),
-(8, 'Siemens AG'),
-(9, 'Tesla Inc.'),
-(10, 'Novartis');
+INSERT INTO `stock_type` (`stock_type_id`, `stock_type_name`, `stock_type_quality`) VALUES
+(1, 'Apple Inc.', 251.37),
+(2, 'Microsoft Corp.', 371.89),
+(3, 'Amazon Inc.', 326.24),
+(4, 'Alphabet Inc.', 157.18),
+(5, 'Johnson & Johnson', 187.94),
+(6, 'Nestlé', 212.37),
+(7, 'Banco Santander', 268.35),
+(8, 'Siemens AG', 198.54),
+(9, 'Tesla Inc.', 369.74),
+(10, 'Novartis', 158.46);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wallet`
+-- Estructura de tabla para la tabla `wallet`
 --
 
 CREATE TABLE `wallet` (
@@ -155,167 +114,139 @@ CREATE TABLE `wallet` (
   `wallet_name` varchar(69) NOT NULL,
   `wallet_active` tinyint(1) NOT NULL,
   `creation_date` date NOT NULL,
-  `wallet_type_id_FK` int DEFAULT NULL,
-  `id_customers_FK` int NOT NULL
+  `description` varchar(69) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `wallet_type_id_FK` int NOT NULL,
+  `customers_id_FK` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `wallet`
---
-
-INSERT INTO `wallet` (`id_wallet`, `money_amount`, `wallet_name`, `wallet_active`, `creation_date`, `wallet_type_id_FK`, `id_customers_FK`) VALUES
-(1, 1500.75, 'WalletCG_Ahorro', 1, '2025-01-01', 1, 1),
-(2, 3200.5, 'WalletCG_Inv', 1, '2025-01-02', 2, 1),
-(3, 2100, 'WalletCG_Mixta', 1, '2025-01-03', 3, 1),
-(4, 1800, 'WalletML_Ahorro', 1, '2025-02-01', 1, 2),
-(5, 4000, 'WalletML_Inv', 1, '2025-02-02', 2, 2),
-(6, 1200.5, 'WalletPM_Mixta', 1, '2025-03-01', 3, 3),
-(7, 950.25, 'WalletPM_Ahorro', 1, '2025-03-02', 1, 3),
-(8, 2300, 'WalletPM_Inv', 1, '2025-03-03', 2, 3),
-(9, 1200, 'WalletAR_Ahorro', 1, '2025-04-01', 1, 4),
-(10, 1100, 'WalletAR_Mixta', 1, '2025-04-02', 3, 4),
-(11, 975, 'WalletLT_Inv', 1, '2025-05-01', 2, 5),
-(12, 2000, 'WalletLT_Mixta', 1, '2025-05-02', 3, 5),
-(13, 1630, 'WalletJR_Ahorro', 1, '2025-06-01', 1, 6),
-(14, 1340, 'WalletJR_Inv', 1, '2025-06-02', 2, 6),
-(15, 2500, 'WalletJR_Mixta', 1, '2025-06-03', 3, 6),
-(16, 1200, 'WalletPS_Ahorro', 1, '2025-07-01', 1, 7),
-(17, 1300, 'WalletPS_Mixta', 1, '2025-07-02', 3, 7),
-(18, 2200, 'WalletMV_Ahorro', 1, '2025-08-01', 1, 8),
-(19, 2100, 'WalletMV_Mixta', 1, '2025-08-02', 3, 8),
-(20, 2800, 'WalletCP_Ahorro', 1, '2025-09-01', 1, 9),
-(21, 3000, 'WalletCP_Inv', 1, '2025-09-02', 2, 9),
-(22, 1700, 'WalletDN_Mixta', 1, '2025-10-01', 3, 10),
-(23, 1550, 'WalletDN_Inv', 1, '2025-10-02', 2, 10);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `wallet_type`
+-- Estructura de tabla para la tabla `wallet_type`
 --
 
 CREATE TABLE `wallet_type` (
   `wallet_type_id` int NOT NULL,
-  `wallet_type_name` varchar(69) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
+  `wallet_type_name` varchar(69) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Dumping data for table `wallet_type`
+-- Volcado de datos para la tabla `wallet_type`
 --
 
 INSERT INTO `wallet_type` (`wallet_type_id`, `wallet_type_name`) VALUES
 (1, 'Ahorro'),
-(2, 'Inversión'),
+(2, 'Inversion'),
 (3, 'Mixta');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `currency`
+-- Indices de la tabla `currency`
 --
 ALTER TABLE `currency`
   ADD PRIMARY KEY (`currency_id`);
 
 --
--- Indexes for table `customers`
+-- Indices de la tabla `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`id_customers`),
-  ADD KEY `fk_customer_currency` (`currency_id_FK`);
+  ADD KEY `currency_id_fk` (`currency_id_FK`);
 
 --
--- Indexes for table `stocks`
+-- Indices de la tabla `stocks`
 --
 ALTER TABLE `stocks`
   ADD PRIMARY KEY (`id_stocks`),
-  ADD KEY `fk_stocks_wallet` (`id_wallet_FK`),
-  ADD KEY `fk_stocks_stock_type` (`stock_type_id_FK`);
+  ADD KEY `wallet_id_fk` (`wallet_id_FK`),
+  ADD KEY `stock_type_id_fk` (`stock_type_id_FK`);
 
 --
--- Indexes for table `stock_type`
+-- Indices de la tabla `stock_type`
 --
 ALTER TABLE `stock_type`
   ADD PRIMARY KEY (`stock_type_id`);
 
 --
--- Indexes for table `wallet`
+-- Indices de la tabla `wallet`
 --
 ALTER TABLE `wallet`
   ADD PRIMARY KEY (`id_wallet`),
-  ADD KEY `fk_wallet_type` (`wallet_type_id_FK`),
-  ADD KEY `fk_wallet_customers` (`id_customers_FK`);
+  ADD KEY `customers_id_fk` (`customers_id_FK`),
+  ADD KEY `wallet_type_id_fk` (`wallet_type_id_FK`);
 
 --
--- Indexes for table `wallet_type`
+-- Indices de la tabla `wallet_type`
 --
 ALTER TABLE `wallet_type`
   ADD PRIMARY KEY (`wallet_type_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `currency`
+-- AUTO_INCREMENT de la tabla `currency`
 --
 ALTER TABLE `currency`
   MODIFY `currency_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `customers`
+-- AUTO_INCREMENT de la tabla `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id_customers` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_customers` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `stocks`
+-- AUTO_INCREMENT de la tabla `stocks`
 --
 ALTER TABLE `stocks`
-  MODIFY `id_stocks` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_stocks` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `stock_type`
+-- AUTO_INCREMENT de la tabla `stock_type`
 --
 ALTER TABLE `stock_type`
   MODIFY `stock_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `wallet`
+-- AUTO_INCREMENT de la tabla `wallet`
 --
 ALTER TABLE `wallet`
-  MODIFY `id_wallet` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_wallet` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `wallet_type`
+-- AUTO_INCREMENT de la tabla `wallet_type`
 --
 ALTER TABLE `wallet_type`
   MODIFY `wallet_type_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `customers`
+-- Filtros para la tabla `customers`
 --
 ALTER TABLE `customers`
-  ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`currency_id_FK`) REFERENCES `currency` (`currency_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `currency_id_fk` FOREIGN KEY (`currency_id_FK`) REFERENCES `currency` (`currency_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `stocks`
+-- Filtros para la tabla `stocks`
 --
 ALTER TABLE `stocks`
-  ADD CONSTRAINT `fk_stocks_wallet` FOREIGN KEY (`id_wallet_FK`) REFERENCES `wallet` (`id_wallet`),
-  ADD CONSTRAINT `stocks_ibfk_1` FOREIGN KEY (`stock_type_id_FK`) REFERENCES `stock_type` (`stock_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `stock_type_id_fk` FOREIGN KEY (`stock_type_id_FK`) REFERENCES `stock_type` (`stock_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `wallet_id_fk` FOREIGN KEY (`wallet_id_FK`) REFERENCES `wallet` (`id_wallet`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Constraints for table `wallet`
+-- Filtros para la tabla `wallet`
 --
 ALTER TABLE `wallet`
-  ADD CONSTRAINT `fk_wallet_customers` FOREIGN KEY (`id_customers_FK`) REFERENCES `customers` (`id_customers`),
-  ADD CONSTRAINT `wallet_ibfk_1` FOREIGN KEY (`wallet_type_id_FK`) REFERENCES `wallet_type` (`wallet_type_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `customers_id_fk` FOREIGN KEY (`customers_id_FK`) REFERENCES `customers` (`id_customers`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `wallet_type_id_fk` FOREIGN KEY (`wallet_type_id_FK`) REFERENCES `wallet_type` (`wallet_type_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
