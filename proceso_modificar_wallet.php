@@ -8,8 +8,6 @@ $wallet_name = $_POST['txtNombre'];
 $description = $_POST['txtDescripcion'];
 $idtipo = $_POST['lstTipo'];
 
-// No validamos, suponemos que la entrada de datos es correcta
-
 // Definir update
 $sql = "UPDATE wallet SET wallet_name = '" . $wallet_name . "' , description = '" . $description . "' , wallet_type_id_FK = $idtipo 
 WHERE id_wallet = $id_wallet;";

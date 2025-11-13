@@ -35,7 +35,6 @@ if (!$resultado) {
     $descrerror = $conexion->error;
     $mensaje = "<h2 class='text-center mt-5'>Se ha producido un error $numerror: $descrerror</h2>";
 } else {
-    // Puedes añadir chequeo extra con mysqli_affected_rows($conexion) para ver si realmente se insertó
     $mensaje = "<h2 class='text-center mt-5'>Wallet insertada correctamente</h2>";
 }
 

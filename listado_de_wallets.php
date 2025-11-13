@@ -26,7 +26,6 @@ $mensaje .= "<thead><tr><th>ID WALLET</th><th>NOMBRE DEL CLIENTE</th><th>CANTIDA
 $mensaje .= "<tbody>";
 
 // Recorrer filas mientras $fila != null
-// OJO: es una asignación a la variable $fila y después se evalua $fila != null
 while ($fila = mysqli_fetch_assoc($resultado)) {
     $mensaje .= "<tr><td>" . $fila['id_wallet'] . "</td>";
     $mensaje .= "<td>" . $fila['customer_name'] . "</td>";

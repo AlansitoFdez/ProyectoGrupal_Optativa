@@ -5,8 +5,6 @@ $conexion = obtenerConexion();
 // Recuperar parámetros
 $id_wallet = $_POST['id_wallet'];
 
-// No validamos, suponemos que la entrada de datos es correcta
-
 // Definir deletes
 $sqlStocks = "DELETE FROM stocks WHERE wallet_id_FK = $id_wallet;";
 $sql = "DELETE FROM wallet WHERE id_wallet = $id_wallet;";

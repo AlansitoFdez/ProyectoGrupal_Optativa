@@ -5,8 +5,6 @@ $conexion = obtenerConexion();
 // Recuperar parámetro
 $telefono_cliente = $_GET['txtTelefonoCliente'];
 
-// No validamos, suponemos que la entrada de datos es correcta
-
 $sql = "SELECT w.*, wt.wallet_type_name AS tipo_wallet, c.customer_name AS nombre_cliente, c.phone AS telefono_cliente FROM wallet w, customers c, wallet_type wt
 WHERE w.customers_id_FK = c.id_customers
 AND w.wallet_type_id_FK = wt.wallet_type_id
